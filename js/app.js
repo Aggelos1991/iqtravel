@@ -28,6 +28,14 @@ window.addEventListener('load', () => {
     // Apply language from URL param after DOM is fully loaded
     const urlLangParam = new URLSearchParams(window.location.search).get('lang');
     if (urlLangParam === 'en' || urlLangParam === 'el') setLanguage(urlLangParam);
+
+    // Send page height to parent iframe for auto-resize
+    function sendHeight() {
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ type: 'iqtravel-height', height: height }, '*');
+    }
+    sendHeight();
+    setInterval(sendHeight, 1000);
 });
 
 // ─── LANGUAGE TOGGLE ───
