@@ -641,7 +641,7 @@ gsap.from('.footer-brand, .footer-nav, .footer-copy', {
     // ── WordPress REST API endpoint ──
     // Replace with your WordPress site URL when deploying.
     // The endpoint is registered by iqtravel-contact.php in your WP theme/plugin.
-    const WP_ENDPOINT = 'https://YOUR-WORDPRESS-SITE.com/wp-json/iqtravel/v1/contact';
+    const WP_ENDPOINT = 'https://www.iqtaxi.com/newsite/wp-json/iqtravel/v1/contact';
     const WP_CONFIGURED = !WP_ENDPOINT.includes('YOUR-WORDPRESS-SITE');
 
     // Form submit → POST to WordPress REST API
