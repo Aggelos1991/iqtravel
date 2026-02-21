@@ -25,6 +25,9 @@ lenis.on('scroll', ScrollTrigger.update);
 // This is the main fix for the mobile "need to refresh" bug
 window.addEventListener('load', () => {
     ScrollTrigger.refresh();
+    // Apply language from URL param after DOM is fully loaded
+    const urlLangParam = new URLSearchParams(window.location.search).get('lang');
+    if (urlLangParam === 'en' || urlLangParam === 'el') setLanguage(urlLangParam);
 });
 
 // ─── LANGUAGE TOGGLE ───
@@ -63,9 +66,6 @@ function setLanguage(lang) {
     document.querySelectorAll('.funding-content-gr').forEach(el => el.style.display = lang === 'el' ? '' : 'none');
     document.querySelectorAll('.funding-content-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
 }
-
-// Apply language from URL param on load
-if (urlLang) setLanguage(currentLang);
 
 // Bind toggle buttons
 document.querySelectorAll('.lang-toggle').forEach(btn => {
