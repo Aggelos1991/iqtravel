@@ -3482,3 +3482,14 @@ footer {
 @media (max-width: 768px) {
     footer { padding-bottom: 90px; }
 }
+
+/* When embedded in iframe — make funding bar flow normally */
+.in-iframe .funding-sticky-bar {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+}
+.in-iframe footer {
+    padding-bottom: 0;
+}

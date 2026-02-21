@@ -3,6 +3,11 @@
    Three.js Greece Map + GSAP ScrollTrigger + Lenis + Lang Toggle
    ========================================================== */
 
+// ─── IFRAME DETECTION ───
+if (window.self !== window.top) {
+    document.documentElement.classList.add('in-iframe');
+}
+
 // ─── SMOOTH SCROLL (Lenis) ───
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
