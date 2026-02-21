@@ -638,11 +638,11 @@ gsap.from('.footer-brand, .footer-nav, .footer-copy', {
         if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
     });
 
-    // ── Contact form endpoint ──
-    const WP_ENDPOINT = 'contact.php';
-    const WP_CONFIGURED = true;
+    // ── Web3Forms endpoint (free email forwarding) ──
+    const WEB3FORMS_KEY = '0910b7db-91df-437f-8d6e-b554fbaf0257';
+    const FORM_CONFIGURED = !WEB3FORMS_KEY.includes('YOUR_ACCESS_KEY');
 
-    // Form submit → POST to WordPress REST API
+    // Form submit → POST to Web3Forms API
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -668,7 +668,7 @@ gsap.from('.footer-brand, .footer-nav, .footer-copy', {
             submitText.textContent = currentLang === 'en' ? 'Sending...' : 'Αποστολή...';
 
             // ── Guard: endpoint not configured yet ──
-            if (!WP_CONFIGURED) {
+            if (!FORM_CONFIGURED) {
                 submitBtn.disabled = false;
                 submitText.textContent = originalText;
                 let errEl = form.querySelector('.contact-error-msg');
@@ -687,14 +687,16 @@ gsap.from('.footer-brand, .footer-nav, .footer-copy', {
 
             // ── Collect form data ──
             const payload = {
+                access_key: WEB3FORMS_KEY,
                 name:    form.querySelector('[name="name"]').value.trim(),
                 email:   form.querySelector('[name="email"]').value.trim(),
-                subject: form.querySelector('[name="subject"]').value,
+                subject: form.querySelector('[name="subject"]').value || 'IQ Travel Contact Form',
                 message: form.querySelector('[name="message"]').value.trim(),
+                from_name: 'IQ Travel Website',
             };
 
             try {
-                const res = await fetch(WP_ENDPOINT, {
+                const res = await fetch('https://api.web3forms.com/submit', {
                     method:  'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body:    JSON.stringify(payload),
