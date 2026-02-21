@@ -28,7 +28,8 @@ window.addEventListener('load', () => {
 });
 
 // ─── LANGUAGE TOGGLE ───
-let currentLang = 'el'; // Greek is default
+const urlLang = new URLSearchParams(window.location.search).get('lang');
+let currentLang = (urlLang === 'en' || urlLang === 'el') ? urlLang : 'el';
 
 function setLanguage(lang) {
     currentLang = lang;
@@ -62,6 +63,9 @@ function setLanguage(lang) {
     document.querySelectorAll('.funding-content-gr').forEach(el => el.style.display = lang === 'el' ? '' : 'none');
     document.querySelectorAll('.funding-content-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
 }
+
+// Apply language from URL param on load
+if (urlLang) setLanguage(currentLang);
 
 // Bind toggle buttons
 document.querySelectorAll('.lang-toggle').forEach(btn => {
