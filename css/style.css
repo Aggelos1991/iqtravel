@@ -269,6 +269,12 @@ nav.scrolled {
     text-decoration: none;
 }
 
+.logo-text {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
 .nav-logo-img {
     width: 38px;
     height: 38px;
